@@ -1,0 +1,15 @@
+feedparser
+pandas
+lxml
+requests_html
+pyquery
+sentence-transformers
+qdrant-client
+notebook
+transformers
+trl
+peft
+wandb
+wandb
+accelerate
+bitsandbytes
