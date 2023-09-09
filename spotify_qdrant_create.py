@@ -15,9 +15,9 @@ def main():
         "thenlper/gte-large", device="mps" if torch.has_mps else "cuda"
     )  # thenlper/gte-base
 
-    # documents = scrape_playlists()
-    with open("genres.json") as f:
-        documents = json.load(f)
+    documents = scrape_playlists()
+    # with open("genres.json") as f:
+    #     documents = json.load(f)
 
     # Create a client object for Qdrant.
     qdrant = QdrantClient(
@@ -25,24 +25,24 @@ def main():
         api_key=os.environ["QDRANT_API_KEY"],
     )
 
-    # # Related vectors need to be added to a collection. Create a new collection for your startup vectors.
-    # qdrant.recreate_collection(
-    #     collection_name=COLLECTION_NAME,
-    #     vectors_config=VectorParams(
-    #         size=encoder.get_sentence_embedding_dimension(),  # Vector size is defined by used model
-    #         distance=models.Distance.COSINE,
-    #     ),
-    # )
-    #
-    # qdrant.upload_records(
-    #     collection_name=COLLECTION_NAME,
-    #     records=[
-    #         models.Record(
-    #             id=idx, vector=encoder.encode(doc["description"]).tolist(), payload=doc
-    #         )
-    #         for idx, doc in enumerate(documents)
-    #     ],
-    # )
+    # Related vectors need to be added to a collection. Create a new collection for your startup vectors.
+    qdrant.recreate_collection(
+        collection_name=COLLECTION_NAME,
+        vectors_config=VectorParams(
+            size=encoder.get_sentence_embedding_dimension(),  # Vector size is defined by used model
+            distance=models.Distance.COSINE,
+        ),
+    )
+
+    qdrant.upload_records(
+        collection_name=COLLECTION_NAME,
+        records=[
+            models.Record(
+                id=idx, vector=encoder.encode(doc["description"]).tolist(), payload=doc
+            )
+            for idx, doc in enumerate(documents)
+        ],
+    )
 
     hits = qdrant.search(
         collection_name=COLLECTION_NAME,
