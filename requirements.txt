@@ -1,15 +1,16 @@
-feedparser
-pandas
-lxml
-requests_html
-pyquery
-sentence-transformers
-qdrant-client
-notebook
-transformers
-trl
-peft
-wandb
-wandb
-accelerate
-bitsandbytes
+feedparser ~= 6.0.10
+pandas ~= 2.0.3
+lxml ~= 4.9.3
+requests-html ~= 0.10.0
+pyquery ~= 2.0.0
+sentence-transformers ~= 2.2.2
+qdrant-client ~= 1.4.0
+notebook ~= 7.0.3
+transformers ~= 4.32.1
+trl ~= 0.7.1
+peft ~= 0.5.0
+wandb ~= 0.15.9
+accelerate ~= 0.22.0
+bitsandbytes ~= 0.41.1
+einops ~= 0.6.1
+openai ~= 0.28.0
